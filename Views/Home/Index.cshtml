@@ -1,0 +1,42 @@
+﻿<html>
+<head>
+    <script src="bundle.js"></script>
+</head>
+<body>
+<br/>
+You should see a couple of alerts if everything's ok (except if you're using IE :))
+<script>
+    //function handler(error, data) {
+    //    if (error)
+    //        alert("Error: " + error);
+    //    else
+    //        alert('Data: ' + JSON.stringify(data));
+    //};
+    function handlerPromise(data) {
+        alert('Data: ' + JSON.stringify(data));
+    };
+
+    async function MakeHttpCalls() {
+
+        var api = new window.MyApi.ApiApi();
+        //api.apiIndex2Get(function(error, data) {
+        //    alert('qwe ' + JSON.stringify(data));
+        //});
+
+        api.apiIndex3Get({
+            intVar: 3,
+            str: 'asdasd',
+        }).then(handlerPromise);
+
+        var body = new window.MyApi.Index3RequestDto();
+        body.intVar = 9;
+        body.str = "ddd";
+
+        var result = await api.apiIndex4Post({ dto: body });
+        alert('Data: ' + JSON.stringify(result));
+    }
+
+    MakeHttpCalls();
+</script>
+</body>
+</html>
